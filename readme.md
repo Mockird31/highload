@@ -150,14 +150,14 @@ L7: 1 устройство = 5 000 RPS / 20 Гбит/с (SSL дешифровк�
 | Сингапур           | Азия             |     73 |      2 |      2 |
 
 
-
-
+# 5. Логическая схема БД
+![db6](/img/db_6.svg)
 
 
 
 
 ## Источники
-[^1]: Статистика пользователей Spotify - https://www.demandsage.com/spotify-stats/ 
+[^1]: Статистика пользователей Spotify - https://www.demandsage.com/spotify-stats/
 [^2]: Статистика пользователей Spotify по возрасту - https://techbehemoths.com/blog/spotify-marketing-strategy-analyzed-leading-music-streaming-app
 [^3]: Отношение DAU/MAU - https://www.thepmrepo.com/articles/how-spotifys-addictive-personalisation-engine-drives-monthly-active-users
 [^4]: Кол-во загружаемых песен ежедневно - https://www.musicbusinessworldwide.com/there-are-now-120000-new-tracks-hitting-music-streaming-services-each-day/
