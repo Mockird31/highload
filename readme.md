@@ -158,31 +158,31 @@ L7: 1 устройство = 5 000 RPS / 20 Гбит/с (SSL дешифровк�
 |user| artist| album | genre | album_genre_ref| album_artist_ref| artist_genre_ref | track | track_album_ref| track_artist_ref | track_genre_ref | playlist | track_playlist_ref | like_album | like_artist| like_track| like_playlist| document | subscription|
 |----|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| -| -|
 |id 16            | id 16           | id 16           | id 16    | id 16       | id 16       | id 16       | id 16          | id 16       | id 16        | id 16        | id 16        | id 16          | id 16        | id 16       | id 16       | id 16         |     id 16 | id 16
-| email 255       | title 32        | title 32        | genre 32 | album_id 16 | album_id 16 | artist_id 16| thumbnail_id 16| track_id 16 | track_id 16  | track_id 16  | title 32           | track_id 16    | user_id 16   | user_id 16  | user_id 16  | user_id 16    | content_type 1 | user_id 16 |
-| username 32     | thumbnail_id 16 | thumbnail_id 16 |          | genre_id 16 | artist_id 16| genre_id 16 | song_id 16     | album_id 16 | artist_id 16 | genre_id 16  | thumbnail_id 16    | playlist_id 16 | album_id 16  | artist_id 16| track_id 16 | playlist_id 16| checksum 32 | subscription_type 1|
-|thumbnail_id 16  | description 500 | realease_date 4 |          | created_at 8| created_at 8| created_at 8| duration 4     | created_at 8| created_at 8 | created_at 8 | user_id 16           | created_at 8   | created_at 8 | created_at 8| created_at 8| created_at 8  | storage_path 200 | started_at 8|
+| email 500       | title 500        | title 500        | genre 32 | album_id 16 | album_id 16 | artist_id 16| thumbnail_id 16| track_id 16 | track_id 16  | track_id 16  | title 500           | track_id 16    | user_id 16   | user_id 16  | user_id 16  | user_id 16    | content_type 1 | user_id 16 |
+| username 500     | thumbnail_id 16 | thumbnail_id 16 |          | genre_id 16 | artist_id 16| genre_id 16 | song_id 16     | album_id 16 | artist_id 16 | genre_id 16  | thumbnail_id 16    | playlist_id 16 | album_id 16  | artist_id 16| track_id 16 | playlist_id 16| checksum 32 | subscription_type 1|
+|thumbnail_id 16  | description 500 | realease_date 4 |          | created_at 8| created_at 8| created_at 8| duration 4     | created_at 8| created_at 8 | created_at 8 | user_id 16           | created_at 8   | created_at 8 | created_at 8| created_at 8| created_at 8  | storage_path 8192 | started_at 8|
 | password_hash 60| created_at 8    |                 |          |             |             |             | created_at 8   | | |                            | created_at 8   |                |              |             |             |               |   size 8 | ended_at 8 |
-| created_at 8    | updated_at 8    |                 |          |             |             |             | updated_at 8   | | |                            | updated_at 8   |                |              |             |             |               |     metadata 64 |
-|updated_at 8     |                 |                 |          |             |             |             | | | | | | | | | | |  created_at 8 |
+| created_at 8    | updated_at 8    |                 |          |             |             |             | updated_at 8   | | |                            | updated_at 8   |                |              |             |             |               |     metadata 500 |
+|updated_at 8     |                 |                 |          |             |             |             | title 500 | | | | | | | | | |  created_at 8 |
 
 ## Рассчеты для таблиц
 | Таблица | Вес записи | Кол-во добавлений в бд / сутки | Прирост / сутки|
 |-|-|-|-|
-| user | 395 байт   | 192000 | 72 Мб |
-| artist | 589 байт | 0.5 |  295 байт |
-| album | 68 байт   | 3000 | 0.2 Мб |
+| user | 1108 байт   | 192000 | 202 Мб |
+| artist | 1048 байт | 0.5 |  524 байт |
+| album | 536 байт   | 3000 | 1.5 Мб |
 | genre | 48 байт   | 0.022 | 1.056 байт |
 | album_genre_ref | 56 байт | 3000 | 0.16 Мб |
 | album_artist_ref | 56 байт |3500 | 0.19 Мб |
 | artist_genre_ref | 56 байт | 0.5 | 28 байт |
-| track | 72 байта | 60000 | 4 Мб |
+| track | 568 байта | 60000 | 32.5 Мб |
 | track_album_ref | 56 байт | 60000 | 3.2 Мб |
 | track_artist_ref | 56 байт | 70000 | 3.7 Мб |
 | track_genre_ref | 56 байт | 60000 | 3.2 Мб |
-| playlist | 96 байт | 1 200 000 |  109 Мб |
+| playlist | 564 байт | 1 200 000 |  645 Мб |
 | track_playlist_ref | 56 байт | 36 000 000 | 1.922 Гб |
 | like_track | 56 байт | 139 000 000 | 7 Гб |
-| document | 337 байт | 1 515 000 | 0.5 Гб |
+| document | 8757 байт | 1 515 000 | 12.3 Гб |
 | subscription | 49 байт | 72222 | 3.4 Мб|
 
 ## QPS
@@ -225,6 +225,85 @@ L7: 1 устройство = 5 000 RPS / 20 Гбит/с (SSL дешифровк�
 | like_track | Strong | Важно, чтобы лайк сразу отображался у трека, и трек сохранялся в плейлисте пользователя | 
 | document | Strong | Недопустимо, если отображается трек, но нет самого аудиофайла |
 | subscription | Eventual | Допустима небольшая задержка перед тем, как пользователь увидит, что подписка была создана |
+
+
+# 6. Физическая схема БД
+![db7](/img/db_7.svg)
+
+## Выбор бд по таблицам
+| Таблица | База данных |
+|-|-|
+|user| Postgres | 
+|artist| Postgres |
+|album| Postgres |
+|album_artist_ref| Postgres| 
+|track_album_ref| Postgres |
+|track| Postgres |
+|track_artist_ref| Postgres|
+|playlist| Postgres |
+|track_playlist_ref| Postgres |
+|user_like| Postgres |
+|artist_cache| Redis |
+|track_cache| Redis |
+|album_cache| Redis |
+|document| Postgres, Amazon S3 |
+| subscription| Postgres |
+| user_playlist_like |Postgres |
+|session |Redis|
+|search_index| ElasticSearch |
+
+## Индексы
+| Таблица | Индексы |
+|-|-|
+|user| - | 
+|artist| pk(id); title |
+|album| pk(id); title |
+|album_artist_ref| btree(album_id); btree(artist_id)| 
+|track_album_ref| btree(track_id); btree(album_id)|
+|track| pk(id); btree(album_id); gin(genres); gin(artist_titles); gin(artist_ids)|
+|track_artist_ref| btree(track_id); btree(artist_id)|
+|playlist| pk(id); btree(title) |
+|track_playlist_ref| btree(track_id); btree(playlist_id)|
+|user_like| btree(user_id); btree(track_id); btree(album_id); btree(track_title); gin(artist_titles); gin(artist_ids) |
+|document| pk(id) |
+| subscription| - |
+| user_playlist_like | pk(id); btree(user_id); btree(playlist_id); btree(playlist_title); btree(author_title) |
+| search_index | по всем полям |
+
+## Шардирование и репликация
+| Таблциа | Шардирование | Репликация |
+|-|-|-|
+| user | user_id hash | 1 основной сервер и 2 реплики|
+|artist| title по диапазону | 1 основной сервер и 2 реплики|
+|album| title по диапазону |1 основной сервер и 2 реплики|
+|album_artist_ref| - | 1 основной сервер и 2 реплики|
+|track_album_ref|-|1 основной сервер и 2 реплики|
+|track_artist_ref|-|1 основной сервер и 2 реплики|
+|track| title по диапазону | 1 основной сервер и 3 реплики|
+| playlist| title по диапазону | 1 основной сервер и 2 реплики |
+|user_like| user_id hash | 1 основной сервер и 3 реплики |
+|document| геолокация | cross-region replication |
+|subscription| user_id hash| 1 основной сервер и 1 реплика|
+|user_playlist_like| user_id hash | 1 основной сервер и 2 реплики |
+|artist_cache| - | кластер Redis с двумя репликами| 
+|track_cache| - | кластер Redis с двумя репликами|
+|album_cache| -| кластер Redis с двумя репликами|
+|session | -| кластер Redis с двумя репликами|
+
+## Клиентские библиотеки
+- PostgreSQL: Golang - pgx, Rust - tokio-postgres
+- Redis: Golang - go-redis, Rust - redis
+- Amazon S3: Golang - aws-sdk-go-v2, Rust - zerofs
+
+## Балансировка запросов
+- PostgreSQL: PgBouncer 
+- Redis: Redis-cluster
+
+## Схема резервного копирования
+- PostgreSQL: ежедневные снапшоты + wal архивирование
+- Redis: RDB снапшоты.
+- Amazon S3: внутренние методы amazon.
+
 
 ## Источники
 [^1]: Статистика пользователей Spotify - https://www.demandsage.com/spotify-stats/
